@@ -503,7 +503,7 @@ var app = (function () {
     			t = text(/*caption*/ ctx[1]);
     			attr_dev(button, "class", button_class_value = "" + (null_to_empty(/*mode*/ ctx[3]) + " svelte-g32zaw"));
     			attr_dev(button, "type", /*type*/ ctx[0]);
-    			add_location(button, file$4, 10, 2, 156);
+    			add_location(button, file$4, 10, 2, 181);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -547,7 +547,7 @@ var app = (function () {
     			t = text(/*caption*/ ctx[1]);
     			attr_dev(a, "href", /*href*/ ctx[2]);
     			attr_dev(a, "class", "svelte-g32zaw");
-    			add_location(a, file$4, 8, 2, 120);
+    			add_location(a, file$4, 8, 2, 145);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -634,10 +634,10 @@ var app = (function () {
     function instance$4($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Button', slots, []);
-    	let { type } = $$props;
+    	let { type = "button" } = $$props;
     	let { caption } = $$props;
-    	let { href } = $$props;
-    	let { mode } = $$props;
+    	let { href = null } = $$props;
+    	let { mode = null } = $$props;
     	const writable_props = ['type', 'caption', 'href', 'mode'];
 
     	Object.keys($$props).forEach(key => {
@@ -682,20 +682,8 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*type*/ ctx[0] === undefined && !('type' in props)) {
-    			console.warn("<Button> was created without expected prop 'type'");
-    		}
-
     		if (/*caption*/ ctx[1] === undefined && !('caption' in props)) {
     			console.warn("<Button> was created without expected prop 'caption'");
-    		}
-
-    		if (/*href*/ ctx[2] === undefined && !('href' in props)) {
-    			console.warn("<Button> was created without expected prop 'href'");
-    		}
-
-    		if (/*mode*/ ctx[3] === undefined && !('mode' in props)) {
-    			console.warn("<Button> was created without expected prop 'mode'");
     		}
     	}
 
@@ -808,27 +796,27 @@ var app = (function () {
     			t10 = space();
     			create_component(button2.$$.fragment);
     			attr_dev(h1, "class", "svelte-8tjse");
-    			add_location(h1, file$3, 13, 4, 237);
+    			add_location(h1, file$3, 14, 4, 255);
     			attr_dev(h2, "class", "svelte-8tjse");
-    			add_location(h2, file$3, 14, 4, 259);
+    			add_location(h2, file$3, 15, 4, 277);
     			attr_dev(p0, "class", "svelte-8tjse");
-    			add_location(p0, file$3, 15, 4, 284);
+    			add_location(p0, file$3, 16, 4, 302);
     			attr_dev(header, "class", "svelte-8tjse");
-    			add_location(header, file$3, 12, 2, 223);
+    			add_location(header, file$3, 13, 2, 241);
     			if (!src_url_equal(img.src, img_src_value = /*imageUrl*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", /*title*/ ctx[0]);
     			attr_dev(img, "class", "svelte-8tjse");
-    			add_location(img, file$3, 19, 4, 344);
+    			add_location(img, file$3, 20, 4, 362);
     			attr_dev(div0, "class", "image svelte-8tjse");
-    			add_location(div0, file$3, 18, 2, 319);
+    			add_location(div0, file$3, 19, 2, 337);
     			attr_dev(p1, "class", "svelte-8tjse");
-    			add_location(p1, file$3, 23, 4, 421);
+    			add_location(p1, file$3, 24, 4, 439);
     			attr_dev(div1, "class", "content svelte-8tjse");
-    			add_location(div1, file$3, 22, 2, 394);
+    			add_location(div1, file$3, 23, 2, 412);
     			attr_dev(footer, "class", "svelte-8tjse");
-    			add_location(footer, file$3, 26, 2, 457);
+    			add_location(footer, file$3, 27, 2, 475);
     			attr_dev(article, "class", "svelte-8tjse");
-    			add_location(article, file$3, 11, 0, 210);
+    			add_location(article, file$3, 12, 0, 228);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -919,7 +907,8 @@ var app = (function () {
     	let { description } = $$props;
     	let { address } = $$props;
     	let { email } = $$props;
-    	const writable_props = ['title', 'subtitle', 'imageUrl', 'description', 'address', 'email'];
+    	let { id } = $$props;
+    	const writable_props = ['title', 'subtitle', 'imageUrl', 'description', 'address', 'email', 'id'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<MeetupItems> was created with unknown prop '${key}'`);
@@ -932,6 +921,7 @@ var app = (function () {
     		if ('description' in $$props) $$invalidate(3, description = $$props.description);
     		if ('address' in $$props) $$invalidate(4, address = $$props.address);
     		if ('email' in $$props) $$invalidate(5, email = $$props.email);
+    		if ('id' in $$props) $$invalidate(6, id = $$props.id);
     	};
 
     	$$self.$capture_state = () => ({
@@ -941,7 +931,8 @@ var app = (function () {
     		imageUrl,
     		description,
     		address,
-    		email
+    		email,
+    		id
     	});
 
     	$$self.$inject_state = $$props => {
@@ -951,13 +942,14 @@ var app = (function () {
     		if ('description' in $$props) $$invalidate(3, description = $$props.description);
     		if ('address' in $$props) $$invalidate(4, address = $$props.address);
     		if ('email' in $$props) $$invalidate(5, email = $$props.email);
+    		if ('id' in $$props) $$invalidate(6, id = $$props.id);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, subtitle, imageUrl, description, address, email];
+    	return [title, subtitle, imageUrl, description, address, email, id];
     }
 
     class MeetupItems extends SvelteComponentDev {
@@ -970,7 +962,8 @@ var app = (function () {
     			imageUrl: 2,
     			description: 3,
     			address: 4,
-    			email: 5
+    			email: 5,
+    			id: 6
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -1005,6 +998,10 @@ var app = (function () {
 
     		if (/*email*/ ctx[5] === undefined && !('email' in props)) {
     			console.warn("<MeetupItems> was created without expected prop 'email'");
+    		}
+
+    		if (/*id*/ ctx[6] === undefined && !('id' in props)) {
+    			console.warn("<MeetupItems> was created without expected prop 'id'");
     		}
     	}
 
@@ -1053,6 +1050,14 @@ var app = (function () {
     	}
 
     	set email(value) {
+    		throw new Error("<MeetupItems>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get id() {
+    		throw new Error("<MeetupItems>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set id(value) {
     		throw new Error("<MeetupItems>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -1378,7 +1383,7 @@ var app = (function () {
     			attr_dev(input, "id", /*id*/ ctx[1]);
     			input.value = /*value*/ ctx[4];
     			attr_dev(input, "class", "svelte-x7uijl");
-    			add_location(input, file$1, 14, 4, 313);
+    			add_location(input, file$1, 14, 4, 343);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
@@ -1432,7 +1437,7 @@ var app = (function () {
     			attr_dev(textarea, "id", /*id*/ ctx[1]);
     			textarea.value = /*value*/ ctx[4];
     			attr_dev(textarea, "class", "svelte-x7uijl");
-    			add_location(textarea, file$1, 12, 4, 255);
+    			add_location(textarea, file$1, 12, 4, 285);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, textarea, anchor);
@@ -1496,9 +1501,9 @@ var app = (function () {
     			if_block.c();
     			attr_dev(label_1, "for", /*id*/ ctx[1]);
     			attr_dev(label_1, "class", "svelte-x7uijl");
-    			add_location(label_1, file$1, 10, 2, 180);
+    			add_location(label_1, file$1, 10, 2, 210);
     			attr_dev(div, "class", "form-control svelte-x7uijl");
-    			add_location(div, file$1, 9, 0, 150);
+    			add_location(div, file$1, 9, 0, 180);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1551,12 +1556,12 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TextInput', slots, []);
-    	let { controlType } = $$props;
-    	let { id } = $$props;
+    	let { controlType = null } = $$props;
+    	let { id = null } = $$props;
     	let { label } = $$props;
-    	let { rows } = $$props;
+    	let { rows = null } = $$props;
     	let { value } = $$props;
-    	let { type } = $$props;
+    	let { type = "text" } = $$props;
     	const writable_props = ['controlType', 'id', 'label', 'rows', 'value', 'type'];
 
     	Object.keys($$props).forEach(key => {
@@ -1628,28 +1633,12 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*controlType*/ ctx[0] === undefined && !('controlType' in props)) {
-    			console.warn("<TextInput> was created without expected prop 'controlType'");
-    		}
-
-    		if (/*id*/ ctx[1] === undefined && !('id' in props)) {
-    			console.warn("<TextInput> was created without expected prop 'id'");
-    		}
-
     		if (/*label*/ ctx[2] === undefined && !('label' in props)) {
     			console.warn("<TextInput> was created without expected prop 'label'");
     		}
 
-    		if (/*rows*/ ctx[3] === undefined && !('rows' in props)) {
-    			console.warn("<TextInput> was created without expected prop 'rows'");
-    		}
-
     		if (/*value*/ ctx[4] === undefined && !('value' in props)) {
     			console.warn("<TextInput> was created without expected prop 'value'");
-    		}
-
-    		if (/*type*/ ctx[5] === undefined && !('type' in props)) {
-    			console.warn("<TextInput> was created without expected prop 'type'");
     		}
     	}
 

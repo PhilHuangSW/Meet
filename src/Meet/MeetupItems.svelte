@@ -7,6 +7,7 @@
   export let description;
   export let address;
   export let email;
+  export let id;
 </script>
 
 <article>
