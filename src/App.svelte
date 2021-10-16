@@ -2,15 +2,10 @@
   import Header from "./UI/Header.svelte";
   import MeetupGrid from "./Meet/MeetupGrid.svelte";
   import { v4 as uuidv4 } from "uuid";
-  import TextInput from "./UI/TextInput.svelte";
   import Button from "./UI/Button.svelte";
+  import EditMeetup from "./Meet/EditMeetup.svelte";
 
-  let title = "";
-  let subtitle = "";
-  let description = "";
-  let imageUrl = "";
-  let address = "";
-  let email = "";
+  let editMode = false;
 
   let meetups = [
     {
@@ -23,6 +18,7 @@
         "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80",
       address: "27th Nerd Road, 32523 New York",
       email: "code@test.com",
+      isFavorite: false,
     },
     {
       id: uuidv4(),
@@ -33,75 +29,52 @@
         "https://images.unsplash.com/photo-1551672746-89991811c186?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c3dpbW1pbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       address: "3023 GreenTree, 92647 California",
       email: "swim@test.com",
+      isFavorite: false,
     },
   ];
 
-  function addMeetup() {
+  function addMeetup(event) {
     meetups = [
       {
         id: uuidv4(),
-        title: title,
-        subtitle: subtitle,
-        description: description,
-        imageUrl: imageUrl,
-        address: address,
-        email: email,
+        title: event.detail.title,
+        subtitle: event.detail.subtitle,
+        description: event.detail.description,
+        imageUrl: event.detail.imageUrl,
+        address: event.detail.address,
+        email: event.detail.email,
+        isFavorite: false,
       },
       ...meetups,
     ];
+    editMode = false;
+  }
+
+  function toggleFavorite(event) {
+    const id = event.detail;
+    const updatedMeetup = { ...meetups.find((m) => m.id === id) };
+    updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
+    const meetupIndex = meetups.findIndex((m) => m.id === id);
+    const updatedMeetups = [...meetups];
+    updatedMeetups[meetupIndex] = updatedMeetup;
+    meetups = updatedMeetups;
+  }
+
+  function cancelAdd() {
+    editMode = false;
   }
 </script>
 
 <Header />
 
 <main>
-  <form on:submit|preventDefault={addMeetup}>
-    <TextInput
-      id="title"
-      label="Title"
-      type="text"
-      value={title}
-      on:input={(event) => (title = event.target.value)}
-    />
-    <TextInput
-      id="subtitle"
-      label="Subtitle"
-      type="text"
-      value={subtitle}
-      on:input={(event) => (subtitle = event.target.value)}
-    />
-    <TextInput
-      id="description"
-      label="Description"
-      controlType="textarea"
-      rows="3"
-      value={description}
-      on:input={(event) => (description = event.target.value)}
-    />
-    <TextInput
-      id="imageUrl"
-      label="ImageUrl"
-      type="text"
-      value={imageUrl}
-      on:input={(event) => (imageUrl = event.target.value)}
-    />
-    <TextInput
-      id="address"
-      label="Address"
-      type="text"
-      value={address}
-      on:input={(event) => (address = event.target.value)}
-    />
-    <TextInput
-      id="email"
-      label="E-Mail"
-      type="email"
-      value={email}
-      on:input={(event) => (email = event.target.value)}
-    />
-    <Button type="submit" caption="Save" />
-  </form>
-  <MeetupGrid {meetups} />
+  <div class="meetup-controls">
+    <Button on:click={() => (editMode = "add")}>New Meetup</Button>
+  </div>
+  {#if editMode === "add"}
+    <EditMeetup on:save={addMeetup} on:cancel={cancelAdd} />
+  {/if}
+  <MeetupGrid {meetups} on:toggleFavorite={toggleFavorite} />
 </main>
 
 <style>
@@ -109,9 +82,7 @@
     margin-top: 5rem;
   }
 
-  form {
-    width: 30rem;
-    max-width: 90%;
-    margin: auto;
+  .meetup-controls {
+    margin: 1rem;
   }
 </style>

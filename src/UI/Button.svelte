@@ -6,9 +6,13 @@
 </script>
 
 {#if href}
-  <a {href}>{caption}</a>
+  <a {href} class={mode}>
+    <slot />
+  </a>
 {:else}
-  <button class={mode} {type}>{caption}</button>
+  <button class={mode} {type} on:click>
+    <slot />
+  </button>
 {/if}
 
 <style>
