@@ -1,8 +1,8 @@
 <script>
   export let type = "button";
-  export let caption;
   export let href = null;
   export let mode = null;
+  export let disabled = false;
 </script>
 
 {#if href}
@@ -10,7 +10,7 @@
     <slot />
   </a>
 {:else}
-  <button class={mode} {type} on:click>
+  <button class={mode} {type} on:click {disabled}>
     <slot />
   </button>
 {/if}
