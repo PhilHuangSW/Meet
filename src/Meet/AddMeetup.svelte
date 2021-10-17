@@ -8,12 +8,12 @@
 
   export let id = null;
 
-  let title = "";
-  let subtitle = "";
-  let description = "";
-  let imageUrl = "";
-  let address = "";
-  let email = "";
+  let title = "asd";
+  let subtitle = "asd";
+  let description = "asd";
+  let imageUrl = "asd";
+  let address = "asd";
+  let email = "asd@asd.com";
 
   if (id) {
     const unsubscribe = meetups.subscribe((items) => {
@@ -73,73 +73,75 @@
   }
 </script>
 
-<Modal title="Add Meetup" on:cancel>
-  <form on:submit|preventDefault={submitForm}>
-    <TextInput
-      id="title"
-      label="Title"
-      valid={titleValid}
-      validityMessage="Please enter a valid title."
-      type="text"
-      value={title}
-      on:input={(event) => (title = event.target.value)}
-    />
-    <TextInput
-      id="subtitle"
-      label="Subtitle"
-      valid={subtitleValid}
-      validityMessage="Please enter a valid subtitle."
-      type="text"
-      value={subtitle}
-      on:input={(event) => (subtitle = event.target.value)}
-    />
-    <TextInput
-      id="description"
-      label="Description"
-      valid={descriptionValid}
-      validityMessage="Please enter a valid description."
-      controlType="textarea"
-      rows="3"
-      bind:value={description}
-    />
-    <TextInput
-      id="imageUrl"
-      label="ImageUrl"
-      valid={imageUrlValid}
-      validityMessage="Please enter a valid image URL."
-      type="text"
-      value={imageUrl}
-      on:input={(event) => (imageUrl = event.target.value)}
-    />
-    <TextInput
-      id="address"
-      label="Address"
-      valid={addressValid}
-      validityMessage="Please enter a valid address."
-      type="text"
-      value={address}
-      on:input={(event) => (address = event.target.value)}
-    />
-    <TextInput
-      id="email"
-      label="E-Mail"
-      valid={emailValid}
-      validityMessage="Please enter a valid email."
-      type="email"
-      value={email}
-      on:input={(event) => (email = event.target.value)}
-    />
-  </form>
-  <div slot="footer">
-    <Button type="button" on:click={cancel} mode="outline">Cancel</Button>
-    <Button type="button" on:click={submitForm} disabled={!formIsValid}
-      >Save</Button
-    >
-    {#if id}
-      <Button type="button" on:click={deleteMeetup}>Delete</Button>
-    {/if}
-  </div>
-</Modal>
+<div>
+  <Modal title="Add Meetup" on:cancel>
+    <form on:submit|preventDefault={submitForm}>
+      <TextInput
+        id="title"
+        label="Title"
+        valid={titleValid}
+        validityMessage="Please enter a valid title."
+        type="text"
+        value={title}
+        on:input={(event) => (title = event.target.value)}
+      />
+      <TextInput
+        id="subtitle"
+        label="Subtitle"
+        valid={subtitleValid}
+        validityMessage="Please enter a valid subtitle."
+        type="text"
+        value={subtitle}
+        on:input={(event) => (subtitle = event.target.value)}
+      />
+      <TextInput
+        id="description"
+        label="Description"
+        valid={descriptionValid}
+        validityMessage="Please enter a valid description."
+        controlType="textarea"
+        rows="3"
+        bind:value={description}
+      />
+      <TextInput
+        id="imageUrl"
+        label="ImageUrl"
+        valid={imageUrlValid}
+        validityMessage="Please enter a valid image URL."
+        type="text"
+        value={imageUrl}
+        on:input={(event) => (imageUrl = event.target.value)}
+      />
+      <TextInput
+        id="address"
+        label="Address"
+        valid={addressValid}
+        validityMessage="Please enter a valid address."
+        type="text"
+        value={address}
+        on:input={(event) => (address = event.target.value)}
+      />
+      <TextInput
+        id="email"
+        label="E-Mail"
+        valid={emailValid}
+        validityMessage="Please enter a valid email."
+        type="email"
+        value={email}
+        on:input={(event) => (email = event.target.value)}
+      />
+    </form>
+    <div slot="footer">
+      <Button type="button" on:click={cancel} mode="outline">Cancel</Button>
+      <Button type="button" on:click={submitForm} disabled={!formIsValid}
+        >Save</Button
+      >
+      {#if id}
+        <Button type="button" on:click={deleteMeetup}>Delete</Button>
+      {/if}
+    </div>
+  </Modal>
+</div>
 
 <style>
   form {
