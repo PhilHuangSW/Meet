@@ -16,7 +16,24 @@
   const dispatch = createEventDispatcher();
 
   function toggleFavorite() {
-    meetups.toggleFavorite(id);
+    fetch(`https://meet-2a75b-default-rtdb.firebaseio.com/meet/${id}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({ isFavorite: !isFavorite }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(
+            "An error occurred at favoriting meetup, please try again later."
+          );
+        }
+        meetups.toggleFavorite(id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 </script>
 
@@ -44,6 +61,7 @@
     <Button mode="outline" type="button" on:click={() => dispatch("edit", id)}
       >Edit</Button
     >
+
     <Button href="mailto:{email}" mode="outline">Contact</Button>
     <Button type="button" on:click={() => dispatch("showDetails", id)}
       >Show Details</Button
